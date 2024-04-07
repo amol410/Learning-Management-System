@@ -75,7 +75,11 @@ def filter_data(request):
 
 
 def COURSE_DETAILS(request, slug):
+    course = Course.objects.filter(slug = slug)
     return render(request, 'course/course_details.html')
+
+def PAGE_NOT_FOUND(request):
+    return render(request, 'error/404.html')
 
 
 
