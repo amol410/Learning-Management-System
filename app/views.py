@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from app.models import Categories, Course, Level
+from app.models import Categories, Course, Level, Video
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
+from django.db.models import Sum
 
 def BASE(request):
     return render(request, 'base.html')
@@ -83,7 +84,10 @@ def filter_data(request):
 
 def COURSE_DETAILS(request, slug):
     course = Course.objects.filter(slug = slug)
+    time_duration = Video.objects.filter(course__slug = slug).aggregate(sum=(Sum('time_duration')))
     category = Categories.get_all_category(Categories)
+    
+    
     if course.exists():
         course = course.first()
     else:
@@ -91,7 +95,8 @@ def COURSE_DETAILS(request, slug):
     
     context = {
          'course':course,
-         'category' : category
+         'category' : category,
+         'time_duration' :time_duration
 
     }
     return render(request, 'course/course_details.html', context)
@@ -103,6 +108,8 @@ def PAGE_NOT_FOUND(request):
         'category' : category
     }
     return render(request, 'error/404.html', context)
+
+
 
 
 
