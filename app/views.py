@@ -35,9 +35,16 @@ def SINGLE_COURSE(request):
              }
     return render(request, 'main/single_course.html', context)
 
+    
+
 
 def CONTACT_US(request):
-    return render(request, 'main/contact_us.html')
+    category = Categories.get_all_category(Categories)
+
+    context = {
+        'category' : category
+    }
+    return render(request, 'main/contact_us.html', context)
 
 
 def ABOUT_US(request):
@@ -76,10 +83,26 @@ def filter_data(request):
 
 def COURSE_DETAILS(request, slug):
     course = Course.objects.filter(slug = slug)
-    return render(request, 'course/course_details.html')
+    category = Categories.get_all_category(Categories)
+    if course.exists():
+        course = course.first()
+    else:
+        return redirect('404')    
+    
+    context = {
+         'course':course,
+         'category' : category
+
+    }
+    return render(request, 'course/course_details.html', context)
 
 def PAGE_NOT_FOUND(request):
-    return render(request, 'error/404.html')
+    category = Categories.get_all_category(Categories)
+
+    context = {
+        'category' : category
+    }
+    return render(request, 'error/404.html', context)
 
 
 
