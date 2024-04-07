@@ -15,7 +15,7 @@ def HOME(request):
               'course'  : course
              
              }
-    return render(request, 'main/home.html', context)
+    return render(request, 'main/index.html', context)
 
 def SINGLE_COURSE(request):
 
@@ -72,6 +72,11 @@ def filter_data(request):
     }
     t = render_to_string('ajax/course.html', context)
     return JsonResponse({'data': t})
+
+
+def COURSE_DETAILS(request, slug):
+    return render(request, 'course/course_details.html')
+
 
 
 

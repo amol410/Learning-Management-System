@@ -6,8 +6,9 @@ urlpatterns = [
     path('base', views.BASE, name='base'),
     path('', views.HOME, name='home' ),
     path('courses', views.SINGLE_COURSE, name='single_course'),
+    path('course/<slug:slug>', views.COURSE_DETAILS, name='course_details'),
     path('contact', views.CONTACT_US, name='contact_us'),
     path('about', views.ABOUT_US, name='about_us'),
-    path('product/filter-data',views.filter_data,name="filter-data"),
+    path('courses/filter-data',views.filter_data,name="filter-data"),
 ]
 
