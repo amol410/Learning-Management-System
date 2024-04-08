@@ -11,5 +11,6 @@ urlpatterns = [
     path('contact', views.CONTACT_US, name='contact_us'),
     path('about', views.ABOUT_US, name='about_us'),
     path('courses/filter-data',views.filter_data,name="filter-data"),
+    path('checkout/<slug:slug>', views.CHECKOUT, name='checkout')
 ]
 
