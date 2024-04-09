@@ -3,6 +3,8 @@ from app.models import *
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
+import logging
 
 def BASE(request):
     return render(request, 'base.html')
@@ -134,6 +136,16 @@ def CHECKOUT(request, slug):
         return redirect('home')
     
     return render(request, 'checkout/checkout.html' )
+
+
+
+def MY_COURSE(request):
+        course = UserCourse.objects.filter(user=request.user)
+        context = {
+            'course': course
+        }
+        return render(request, 'course/my_course.html', context)
+    
 
 
 
