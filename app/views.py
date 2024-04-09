@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 import logging
 
 def BASE(request):
@@ -133,7 +134,8 @@ def CHECKOUT(request, slug):
             
             )
         course.save()
-        return redirect('home')
+        messages.success(request, 'Course is successfully Enrolled')
+        return redirect('my_course')
     
     return render(request, 'checkout/checkout.html' )
 
