@@ -1,11 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Order are Successful</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static %}
+{% load course_tags %}
+
+{% block content %}
+   <div class="container py-8 py-lg-11">
+       <div class="row">
+           <div class="col-xl-8 mx-xl-auto">
+               <img src="{% static 'assets/img/success.png' %}" width="80px" class="img-fluid mx-auto d-block">
+               <header class="entry-header mt-4">
+                   <h1 class="entry-title text-center">Order received</h1>
+                   <p class="text-center">Thank you. Your order has been received.</p>
+               </header>
+               <div class="row border border-info p-4">
+                   <div class="col-lg-3">
+                       Order ID: <br>
+                       <strong>{{ payment.order_id }}</strong>
+                   </div>
+                   <div class="col-lg-3">
+                       Date: <br>
+                       <strong>{{ payment.date }}</strong>
+                   </div>
+                   <div class="col-lg-3">
+                       Total:<br>
+                       <strong>{{ payment.course.price }}</strong>
+                   </div>
+                   <div class="col-lg-3">
+                       Payment method: <br>
+                       <strong>Online payments</strong>
+                   </div>
+               </div>
+               <br>
+               <div class="row p-4 border border-dark">
+                
+  <h2>Order details</h2>
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <td>{{payment.course.title}}</td>
+      <td>₹ {{ payment.course.price }}</td>
+    </tr>
+    <tr>
+      <td colspan="2" style="border-top: 1px solid #ccc;"></td>
+    </tr>
+    <tr>
+      <td>Discount</td>
+      <td>{{ payment.course.discount }} %</td>
+    </tr>
+    <tr>
+      <td colspan="2" style="border-top: 1px solid #ccc;"></td>
+    </tr>
+    
+    <tr>
+      <td>Payment method:</td>
+      <td>Online payments</td>
+    </tr><br>
+    <tr>
+      <td colspan="2" style="border-top: 1px solid #ccc;"></td>
+    </tr>
+    <tr>
+      <td>Total:</td>
+      <td>₹ {% discount_calculation payment.course.price payment.course.discount %} </td>
+    </tr>
+  </table>
+              
+               </div>
+           </div>
+       </div>
+   </div>
+{% endblock %}

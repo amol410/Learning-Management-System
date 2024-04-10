@@ -182,12 +182,29 @@
                                     <div class="d-flex align-items-center me-auto mb-4 mb-md-0">
                                         <div class="text-secondary d-flex">
                                             <i class="fa-brands fa-youtube" style="color:red;"></i>
+                                        </div>
 
-                                        </div>
+                                        {% if check_enroll is not None%}
+                                        <a href="/course/watch-course/{{course.slug}}">
+                                        <div class="ms-4" data-toggle="tooltip" title="Click and Watch Video">
+                                            {{video.title}}
+                                           </div>
+                                        </a>
+                                        {% else %}
+                                        {% if video.preview == True %}
+                                        <a href="https://www.youtube.com/watch?v={{video.youtube_id}}" class="rounded" data-fancybox>
+                                            <div class="ms-4" data-toggle="tooltip" title="Watch for Free!">
+                                                {{video.title}}
+                                               </div>
+                                            </a>
+                                        {% else %}
+                                        
+                                        <div class="ms-4" data-toggle="tooltip" title="Enroll This Course!">
                                          {{video.title}}
-                                        <div class="ms-4">
-                                            
                                         </div>
+                                        {% endif %}
+                                        {% endif %}
+                                        
                                     </div>
 
                                     <div class="d-flex align-items-center overflow-auto overflow-md-visible flex-shrink-all">
@@ -570,7 +587,7 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Enrolled</h6>
-                                <span>1982 students</span>
+                                <span>{{course.usercourse_set.all.count}} Students</span>
                             </li>
                             <li class="list-group-item d-flex align-items-center py-3" style="background-color:#F7F9FB">
                                 <div class="text-secondary d-flex icon-uxs">

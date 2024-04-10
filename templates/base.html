@@ -33,7 +33,9 @@
     <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Skola-{% block title %} {% endblock %}</title>
-    
+    <script>$(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })</script>
 </head>
 <body>
     {% include "components/modals.html" %}
